@@ -1,9 +1,9 @@
 # MariaDB on Alpine Linux
-FROM alpine:3.3
+FROM alpine:3.18
 
 # MariaDB server and client
 RUN apk update && apk add mariadb mariadb-client # this is not executed by mariadb package
-RUN mysql_install_db --user=mysql
+RUN mysql_install_db --user=mysql --basedir=/usr
 
 # make life easier
 ENV TERM xterm
@@ -30,5 +30,5 @@ ENTRYPOINT ["mysqld_safe"]
 # MariaDB port
 EXPOSE 3306
 
-# Keep MariaDB running
-CMD ["mysqld", "-g", "daemon off;"]
+# # Keep MariaDB running
+# CMD ["mysqld"]

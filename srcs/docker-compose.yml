@@ -1,9 +1,8 @@
 version: "3.8"
 
 networks:
-  front-connection:
-    driver: bridge
-  db-connection:
+  mynet:
+    name: ${MY_NETWORK}
     driver: bridge
 
 services:
@@ -11,38 +10,39 @@ services:
     container_name: nginx
     build: ./requirements/nginx/
     ports: 
-      - "80:80/tcp"
+      - "80:80"
       - "443:443"
-    networks:
-      - front-connection
     depends_on:
       - wordpress
+    networks:
+      - ${MY_NETWORK}
+      
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
     environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: DBUSER
-      WORDPRESS_DB_PASSWORD: DBPASS
-      WORDPRESS_DB_NAME: exdb
-    networks:
-      - front-connection
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     expose:
       - "3306"
     volumes:
       - ./requirements/mariadb/data:/var/lib/mysql
+    networks:
+      - ${MY_NETWORK}
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
     environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: DBUSER
-      WORDPRESS_DB_PASSWORD: DBPASS
-      ORDPRESS_DB_NAME: exdb
-    networks:
-      - front-connection
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_TABLE_PREFIX: wp_
     depends_on:
       - mariadb
     volumes:
       - ./requirements/wordpress/wordpress:/var/www/html
+    networks:
+      - ${MY_NETWORK}
     
+

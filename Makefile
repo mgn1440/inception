@@ -14,4 +14,4 @@ rebuild:
 # Define the clean target
 clean:
 	$(DOCKER_COMPOSE) down
-	docker rmi $(docker images -q) -f
+	docker rmi $$(docker images -q) -f

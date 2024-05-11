@@ -16,6 +16,8 @@ services:
       - wordpress
     networks:
       - ${MY_NETWORK}
+    volumes:
+      - ./requirements/wordpress/wordpress:/var/www/html
       
   mariadb:
     container_name: mariadb

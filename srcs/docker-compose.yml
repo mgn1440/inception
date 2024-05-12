@@ -17,7 +17,7 @@ services:
     networks:
       - ${MY_NETWORK}
     volumes:
-      - ./requirements/wordpress/wordpress:/var/www/html
+      - wordpress_page:/var/www/html
       
   mariadb:
     container_name: mariadb
@@ -27,7 +27,7 @@ services:
     expose:
       - "3306"
     volumes:
-      - ./requirements/mariadb/data:/var/lib/mysql
+      - wordpress_db:/var/lib/mysql
     networks:
       - ${MY_NETWORK}
 
@@ -43,8 +43,10 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - ./requirements/wordpress/wordpress:/var/www/html
+      - wordpress_page:/var/www/html
     networks:
       - ${MY_NETWORK}
     
-
+volumes:
+  wordpress_page:
+  wordpress_db:

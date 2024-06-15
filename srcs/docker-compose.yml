@@ -46,7 +46,16 @@ services:
       - wordpress_page:/var/www/html
     networks:
       - ${MY_NETWORK}
-    
 volumes:
   wordpress_page:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/yeonwkan/42/42cursus/inception/srcs/requirements/wordpress/wordpress
+      o: bind
   wordpress_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/yeonwkan/42/42cursus/inception/srcs/requirements/mariadb/data
+      o: bind

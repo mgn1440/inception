@@ -1,5 +1,4 @@
 #!/bin/sh
 
-adduser -D $WORDPRESS_DB_USER
-mysql_install_db --user=$WORDPRESS_DB_USER --datadir=/var/lib/mysql
+# mysql -u root -e "CREATE DATABASE $WORDPRESS_DB_NAME"
 mysqld_safe

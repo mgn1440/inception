@@ -15,9 +15,21 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 # Copy www.conf to the desired location
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY ./tools/ /usr/bin/local/
 
 # Expose port 9000 for Nginx communication
 EXPOSE 9000
 
+ENV WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+ENV WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+ENV WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+ENV WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+ENV WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
+
 # Start PHP-FPM
+
+RUN chmod +x /usr/bin/local/entrypoint.sh
+
+# ENTRYPOINT ["usr/bin/local/entrypoint.sh"]
+
 CMD ["php-fpm7", "-F"]

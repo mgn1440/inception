@@ -9,7 +9,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
-    ports: 
+    ports:
       - "80:80"
       - "443:443"
     depends_on:
@@ -18,12 +18,14 @@ services:
       - ${MY_NETWORK}
     volumes:
       - wordpress_page:/var/www/html
-      
+
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     expose:
       - "3306"
     volumes:

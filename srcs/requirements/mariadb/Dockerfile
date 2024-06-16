@@ -3,17 +3,19 @@ FROM alpine:3.18
 
 # MariaDB server and client
 RUN apk update && apk add mariadb mariadb-client
+RUN apk add --no-cache openrc
 
 # set environment variables
-ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-ENV MYSQL_DATABASE=${MYSQL_DATABASE}
-ENV MYSQL_USER=${MYSQL_USER}
-ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
+ENV WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+ENV WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
 
 # import files into container
-COPY ./conf/ /etc/mysql/
+COPY ./conf/my.cnf /etc/mysql/
+COPY ./conf/mariadb-server.conf /etc/my.cnf.d/
 COPY ./tools/ /usr/bin/local/
 
+RUN chmod 644 /etc/mysql/my.cnf
+RUN chmod 644 /etc/my.cnf.d/mariadb-server.cnf
 RUN chmod +x /usr/bin/local/entrypoint.sh
 
 ENTRYPOINT ["usr/bin/local/entrypoint.sh"]

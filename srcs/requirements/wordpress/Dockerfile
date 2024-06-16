@@ -30,6 +30,6 @@ ENV WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
 
 RUN chmod +x /usr/bin/local/entrypoint.sh
 
-# ENTRYPOINT ["usr/bin/local/entrypoint.sh"]
+ENTRYPOINT ["usr/bin/local/entrypoint.sh"]
 
-CMD ["php-fpm7", "-F"]
+# CMD ["php-fpm7", "-F"]

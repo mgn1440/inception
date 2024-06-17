@@ -53,11 +53,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/yeonwkan/42/42cursus/inception/srcs/requirements/wordpress/wordpress
+      device: ./requirements/wordpress/wordpress
       o: bind
   wordpress_db:
     driver: local
     driver_opts:
       type: none
-      device: /Users/yeonwkan/42/42cursus/inception/srcs/requirements/mariadb/data
+      device: ./requirements/mariadb/data
       o: bind

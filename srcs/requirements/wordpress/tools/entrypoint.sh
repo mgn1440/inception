@@ -7,4 +7,7 @@ while [ ! -f /var/www/html/wp-config.php ]; do
 	sleep 1
 done
 
+wp core install --url="localhost" --title="WP-CLI" --admin_user=yeonwkan --admin_password=yeonwkan --admin_email=mgn1440@gmail.com
+wp user create author author@example.com --role=author
+
 php-fpm7 -F

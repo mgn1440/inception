@@ -1,5 +1,5 @@
 # MariaDB on Alpine Linux
-FROM alpine:3.18
+FROM alpine:3.19
 
 # MariaDB server and client
 RUN apk update && apk add mariadb mariadb-client

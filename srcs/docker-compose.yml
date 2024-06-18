@@ -9,6 +9,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
+    image: nginx
     ports:
       - "80:80"
       - "443:443"
@@ -22,6 +23,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
+    image: mariadb
     environment:
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
@@ -36,6 +38,7 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
+    image: wordpress
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
@@ -53,11 +56,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./requirements/wordpress/wordpress
+      device: ./srcs/requirements/wordpress/wordpress
       o: bind
   wordpress_db:
     driver: local
     driver_opts:
       type: none
-      device: ./requirements/mariadb/data
+      device: ./srcs/requirements/mariadb/data
       o: bind

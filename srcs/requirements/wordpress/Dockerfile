@@ -1,5 +1,5 @@
 # Use Alpine Linux as the base image
-FROM alpine:3.14
+FROM alpine:3.19
 
 # Install PHP-FPM
 RUN apk update

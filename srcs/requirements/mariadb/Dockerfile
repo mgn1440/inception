@@ -14,7 +14,7 @@ COPY ./conf/my.cnf /etc/mysql/
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
 COPY ./tools/ /usr/bin/local/
 
-RUN chmod 777 /var/lib/mysql
+# RUN chmod 777 /var/lib/mysql
 RUN chmod 644 /etc/mysql/my.cnf
 RUN chmod 644 /etc/my.cnf.d/mariadb-server.cnf
 RUN chmod +x /usr/bin/local/entrypoint.sh

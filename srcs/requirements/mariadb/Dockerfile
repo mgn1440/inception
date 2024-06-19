@@ -5,10 +5,6 @@ FROM alpine:3.19
 RUN apk update && apk add mariadb mariadb-client
 RUN apk add --no-cache openrc
 
-# set environment variables
-ENV WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-ENV WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-
 # import files into container
 COPY ./conf/my.cnf /etc/mysql/
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
@@ -18,8 +14,6 @@ COPY ./tools/ /usr/bin/local/
 RUN chmod 644 /etc/mysql/my.cnf
 RUN chmod 644 /etc/my.cnf.d/mariadb-server.cnf
 RUN chmod +x /usr/bin/local/entrypoint.sh
-
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 ENTRYPOINT ["usr/bin/local/entrypoint.sh"]
 
